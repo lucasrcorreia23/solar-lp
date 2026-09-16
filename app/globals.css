@@ -1,26 +1,125 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Cores: tema light */
+  --color-bg: #f9f9f9;
+  --color-accent: #e34e35;
+  --color-heading: #000000;
+  --color-fg: rgba(0, 0, 0, 0.6);
+  --color-assistant: #e6e6e6;
+  --color-numeral: #8a8a8a;
+  --color-partner: #462324;
+  --color-border: #bebebe;
+  --color-reverse: #141414;
+  --color-reverse-heading: #ffffff;
+
+  /* Famílias (variáveis injetadas pelo next/font no <html>) */
+  --font-display: var(--font-poppins), system-ui, sans-serif;
+  --font-body: var(--font-roboto), system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, monospace;
+
+  /* Tipografia: display / body / utility */
+  --text-display-xl: clamp(2.25rem, 0.7rem + 6.9vw, 6rem);
+  --text-display-xl--line-height: 1.08;
+  --text-display-xl--letter-spacing: -0.03em;
+  --text-display: clamp(2rem, 1rem + 4.5vw, 5.5rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.02em;
+  --text-display-sm: clamp(1.375rem, 1rem + 1.6vw, 2.25rem);
+  --text-display-sm--line-height: 1.1;
+  --text-display-sm--letter-spacing: -0.01em;
+  --text-body: clamp(1rem, 0.95rem + 0.25vw, 1.1875rem);
+  --text-body--line-height: 1.6;
+  --text-utility: 0.8125rem;
+  --text-utility--line-height: 1.4;
+  --text-utility--letter-spacing: 0.14em;
+
+  /* Display que quebra em 2+ linhas */
+  --leading-display-wrap: 1.15;
+
+  /* Ritmo de seção: 80px mobile / 120px desktop */
+  --spacing-section: 7.5rem;
+  --spacing-section-sm: 5rem;
+
+  /* Easings */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-nakama: cubic-bezier(0.62, 0.05, 0.01, 0.99);
+
+  /* Durações: geram duration-fast / duration-base / duration-slow */
+  --transition-duration-fast: 300ms;
+  --transition-duration-base: 600ms;
+  --transition-duration-slow: 1000ms;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-bg font-body text-body text-fg antialiased;
+  }
+  h1, h2, h3 {
+    @apply font-display font-semibold text-heading;
+    text-wrap: balance;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-heading);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Lenis (CSS recomendado) */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* View Transitions: páginas como superfície contínua */
+@media not (prefers-reduced-motion: reduce) {
+  ::view-transition-old(.page) { animation: 240ms var(--ease-nakama) both vt-exit; }
+  ::view-transition-new(.page) { animation: 320ms var(--ease-nakama) 60ms both vt-enter; }
 }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+@keyframes vt-exit { to { opacity: 0; transform: translateY(-10px); } }
+@keyframes vt-enter { from { opacity: 0; transform: translateY(14px); } }
+
+/* Split text: a máscara não pode comer descendente */
+.split-line-mask { padding-bottom: 0.16em; margin-bottom: -0.16em; }
+:has(> .split-line-mask) { display: flow-root; }
+
+/* Impressão e captura de página inteira: overlays fixos não vazam */
+@media print {
+  [data-grain], .cursor-root { display: none !important; }
+}
+
+/* Cursor contextual */
+.cursor-dot {
+  display: block; width: 10px; height: 10px; border-radius: 9999px;
+  background: var(--color-heading);
+  transition: transform 300ms var(--ease-out-expo), opacity 300ms var(--ease-out-expo);
+}
+.cursor-root[data-state="hidden"] .cursor-dot { opacity: 0; transform: scale(0.4); }
+.cursor-label {
+  position: absolute; left: 16px; top: 16px; white-space: nowrap;
+  font-family: var(--font-display); font-size: var(--text-utility);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  background: var(--color-heading); color: var(--color-reverse-heading);
+  padding: 0.5rem 0.75rem; opacity: 0; transform: translateY(4px) scale(0.96);
+  transition: opacity 240ms var(--ease-out-expo), transform 240ms var(--ease-out-expo);
+}
+.cursor-root[data-state="label"] .cursor-label { opacity: 1; transform: none; }
+.cursor-root[data-state="label"] .cursor-dot { transform: scale(1.6); }
