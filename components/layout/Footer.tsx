@@ -5,7 +5,7 @@ import { SITE, isExternalHref } from "@/content/site";
 export function Footer() {
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-[90rem] flex-col gap-12 px-6 py-section-sm md:px-10 md:py-section">
+      <div className="mx-auto flex max-w-[90rem] flex-col gap-12 px-6 pb-10 pt-16 md:px-10 md:pb-12 md:pt-20">
         <div className="flex flex-col gap-10 md:flex-row md:justify-between">
           <div className="max-w-sm">
             <Image
@@ -37,7 +37,7 @@ export function Footer() {
             <li>
               <a
                 href={`mailto:${SITE.email}`}
-                className="transition-colors duration-fast hover:text-accent"
+                className="transition-colors duration-fast hover:text-heading"
               >
                 {SITE.email}
               </a>
@@ -47,7 +47,7 @@ export function Footer() {
                 href={SITE.whatsapp.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors duration-fast hover:text-accent"
+                className="transition-colors duration-fast hover:text-heading"
               >
                 WhatsApp {SITE.whatsapp.display}
               </a>
@@ -58,7 +58,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors duration-fast hover:text-accent"
+                  className="transition-colors duration-fast hover:text-heading"
                 >
                   {social.label}
                 </a>
@@ -70,14 +70,14 @@ export function Footer() {
                   href={SITE.politica}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors duration-fast hover:text-accent"
+                  className="transition-colors duration-fast hover:text-heading"
                 >
                   Política de Privacidade
                 </a>
               ) : (
                 <Link
                   href={SITE.politica}
-                  className="transition-colors duration-fast hover:text-accent"
+                  className="transition-colors duration-fast hover:text-heading"
                 >
                   Política de Privacidade
                 </Link>
@@ -90,7 +90,7 @@ export function Footer() {
           <p className="font-mono text-utility uppercase text-heading">
             {SITE.bordao}
           </p>
-          <p className="text-utility">
+          <p className="text-sm">
             © {new Date().getFullYear()} {SITE.name} · {SITE.local}
           </p>
         </div>

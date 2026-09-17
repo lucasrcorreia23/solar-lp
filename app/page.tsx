@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { BlocoTese } from "@/components/ui/BlocoTese";
 import { SectionHero } from "@/components/solar/SectionHero";
-import { SectionLogos } from "@/components/solar/SectionLogos";
 import { SectionPadrao } from "@/components/solar/SectionPadrao";
 import { SectionDiagnostico } from "@/components/solar/SectionDiagnostico";
 import { SectionProva } from "@/components/solar/SectionProva";
@@ -19,35 +18,37 @@ export default function Home() {
   return (
     <main id="conteudo" className="flex-1">
       <SectionHero />
-      <SectionLogos />
       <SectionPadrao />
       <SectionDiagnostico />
       <SectionProva />
       <SectionOferta />
       <SectionMetodo />
-      <BlocoTese eyebrow={SOLAR.tese.eyebrow}>
-        <p
+      <BlocoTese>
+        <h2
           data-manifesto
-          className="max-w-[22ch] font-display text-display font-semibold leading-display-wrap"
+          className="max-w-[15ch] text-display-xl text-reverse-heading"
         >
           {SOLAR.tese.titulo}
-        </p>
-        <p className="mt-8 max-w-xl opacity-80">{SOLAR.tese.copy}</p>
-        <ol className="mt-16 grid gap-6 md:mt-20 md:grid-cols-2 md:gap-x-10 md:gap-y-8">
-          {SOLAR.tese.provas.map((prova, i) => (
-            <li key={prova} className="flex gap-4">
-              <span
-                aria-hidden="true"
-                className="font-mono text-utility tabular-nums opacity-70"
+        </h2>
+        <div className="mt-12 grid gap-12 md:mt-20 lg:grid-cols-12 lg:gap-x-8">
+          <p className="max-w-[56ch] text-partner-fg lg:col-span-5">
+            {SOLAR.tese.copy}
+          </p>
+          <ul className="border-t border-partner-line lg:col-span-6 lg:col-start-7">
+            {SOLAR.tese.provas.map((prova) => (
+              <li
+                key={prova}
+                className="flex gap-4 border-b border-partner-line py-4 font-display text-lg font-semibold md:py-5 md:text-xl"
               >
-                {String(i + 1).padStart(3, "0")}
-              </span>
-              <span className="font-mono text-utility uppercase opacity-90">
+                <span
+                  aria-hidden="true"
+                  className="mt-[0.75em] w-5 shrink-0 border-t border-accent"
+                />
                 {prova}
-              </span>
-            </li>
-          ))}
-        </ol>
+              </li>
+            ))}
+          </ul>
+        </div>
       </BlocoTese>
       <SectionConversao />
       <SolarChoreography />

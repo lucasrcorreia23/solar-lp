@@ -12,6 +12,9 @@
   --color-border: #bebebe;
   --color-reverse: #141414;
   --color-reverse-heading: #ffffff;
+  /* Texto e fios sobre o bloco vinho (BlocoTese) */
+  --color-partner-fg: rgba(249, 249, 249, 0.76);
+  --color-partner-line: rgba(249, 249, 249, 0.18);
 
   /* Famílias (variáveis injetadas pelo next/font no <html>) */
   --font-display: var(--font-poppins), system-ui, sans-serif;
@@ -25,6 +28,10 @@
   --text-display: clamp(2rem, 1rem + 4.5vw, 5.5rem);
   --text-display--line-height: 1.02;
   --text-display--letter-spacing: -0.02em;
+  /* Títulos longos e citações: evita paredes de 6+ linhas */
+  --text-display-md: clamp(1.75rem, 1.2rem + 2.2vw, 3.25rem);
+  --text-display-md--line-height: 1.1;
+  --text-display-md--letter-spacing: -0.02em;
   --text-display-sm: clamp(1.375rem, 1rem + 1.6vw, 2.25rem);
   --text-display-sm--line-height: 1.1;
   --text-display-sm--letter-spacing: -0.01em;
@@ -53,8 +60,16 @@
 }
 
 @layer base {
+  html {
+    scrollbar-color: var(--color-border) var(--color-bg);
+    caret-color: var(--color-accent);
+    accent-color: var(--color-accent);
+  }
   body {
     @apply bg-bg font-body text-body text-fg antialiased;
+  }
+  a {
+    text-underline-offset: 0.3em;
   }
   h1, h2, h3 {
     @apply font-display font-semibold text-heading;
@@ -65,8 +80,11 @@
     color: #fff;
   }
   :focus-visible {
-    outline: 2px solid var(--color-heading);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
+  }
+  .font-mono {
+    font-variant-numeric: tabular-nums;
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -96,6 +114,9 @@ html.lenis, html.lenis body { height: auto; }
 }
 @keyframes vt-exit { to { opacity: 0; transform: translateY(-10px); } }
 @keyframes vt-enter { from { opacity: 0; transform: translateY(14px); } }
+
+/* Aspas penduradas: o texto alinha na borda, a aspa fica na margem */
+.aspas-penduradas { text-indent: -0.36em; }
 
 /* Split text: a máscara não pode comer descendente */
 .split-line-mask { padding-bottom: 0.16em; margin-bottom: -0.16em; }

@@ -6,7 +6,6 @@ export interface ClientLogo {
   width: number;
   height: number;
   escala: number;
-  claro?: boolean;
 }
 
 export interface CaseCard {
@@ -34,7 +33,6 @@ function whatsappComTexto(texto: string): string {
  */
 export const SOLAR = {
   abertura: {
-    eyebrow: "Estúdio Nákama · Energia solar",
     headline: [
       "O estúdio de estratégia, design e tecnologia",
       "do setor solar.",
@@ -58,7 +56,7 @@ export const SOLAR = {
         src: "/clients/weg.png",
         width: 600,
         height: 422,
-        escala: 1.35,
+        escala: 1.2,
       },
       {
         nome: "UNIFIQUE Energia",
@@ -72,21 +70,18 @@ export const SOLAR = {
         src: "/clients/solan-group.png",
         width: 600,
         height: 327,
-        escala: 1.45,
-        claro: true,
+        escala: 1.4,
       },
       {
         nome: "PV Operation",
         src: "/clients/pv-operation.png",
         width: 1115,
         height: 233,
-        escala: 1.1,
-        claro: true,
+        escala: 1.05,
       },
     ] satisfies ClientLogo[],
   },
   padrao: {
-    eyebrow: "O padrão que se repete",
     titulo: "Cresce a geração de energia. A forma de operar por trás dela nem sempre acompanha.",
     dores: [
       {
@@ -117,7 +112,6 @@ export const SOLAR = {
     ],
   },
   diagnostico: {
-    eyebrow: "O diagnóstico",
     titulo:
       "O setor de energia solar cresceu mais rápido do que a maioria das empresas conseguiu se estruturar por dentro.",
     paragrafos: [
@@ -127,7 +121,6 @@ export const SOLAR = {
     ],
   },
   prova: {
-    eyebrow: "Prova, não adjetivo",
     titulo: "Não é teoria. É o que o Estúdio já fez dentro do setor solar.",
     cases: [
       {
@@ -189,7 +182,6 @@ export const SOLAR = {
     ] satisfies CaseCard[],
   },
   oferta: {
-    eyebrow: "Por onde começar",
     titulo: "Duas formas de começar. A prioridade da sua operação decide qual delas.",
     rapida: {
       kicker: "Entrada rápida · já provado no case R4",
@@ -227,7 +219,6 @@ export const SOLAR = {
     },
   },
   metodo: {
-    eyebrow: "Como o Estúdio atua",
     titulo: "Estratégia, design e tecnologia, na ordem certa.",
     etapas: [
       {
@@ -251,7 +242,6 @@ export const SOLAR = {
     ],
   },
   tese: {
-    eyebrow: "Por que conversar com o Estúdio",
     titulo: "Não somos mais um fornecedor de tecnologia.",
     copy: "Não somos uma fábrica de sites nem uma consultoria só de estratégia. Somos um estúdio de estratégia, design e tecnologia, e o setor de energia solar já faz parte da nossa experiência real. Isso significa uma coisa prática: quando você fala com o Estúdio, não precisa explicar o que é geração distribuída, RCE ou integrador. A gente já entende o vocabulário do seu mercado.",
     provas: [
@@ -263,7 +253,6 @@ export const SOLAR = {
     ],
   },
   conversao: {
-    eyebrow: "O primeiro passo",
     titulo: "O primeiro passo não é um projeto. É uma conversa.",
     apoio:
       "Conte pra gente qual parte da sua operação ainda depende de planilha, retrabalho ou sistema que não conversa com outro. A gente escuta antes de sugerir qualquer coisa.",

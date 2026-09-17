@@ -26,9 +26,9 @@ export function SolarChoreography() {
       const freshLoad = performance.now() < 2500 && window.scrollY < 80;
       if (hero && freshLoad) {
         const h1 = hero.querySelector("h1");
-        const eyebrow = hero.querySelector("[data-hero-eyebrow]");
         const sub = hero.querySelectorAll("[data-hero-sub] > *");
-        const strip = document.querySelector("[data-hero-strip]");
+        const strip = hero.querySelector("[data-hero-strip]");
+        const regua = hero.querySelector("[data-hero-rule]");
         if (h1) {
           const split = SplitText.create(h1, {
             type: "lines",
@@ -38,30 +38,23 @@ export function SolarChoreography() {
           cleanups.push(() => split.revert());
           gsap
             .timeline({ defaults: { ease: EASE_GSAP.outExpo } })
-            .from(eyebrow, {
-              clipPath: "inset(0% 100% 0% 0%)",
-              duration: 0.7,
+            .from(split.lines, {
+              yPercent: 120,
+              duration: 1,
+              stagger: STAGGER.base,
             })
-            .from(
-              split.lines,
-              {
-                yPercent: 120,
-                duration: 0.9,
-                stagger: STAGGER.base,
-              },
-              0.15,
-            )
             .from(
               sub,
               {
                 yPercent: 40,
                 autoAlpha: 0,
-                duration: 0.6,
+                duration: 0.7,
                 stagger: STAGGER.tight,
               },
-              0.65,
+              0.45,
             )
-            .from(strip, { autoAlpha: 0, duration: 0.6 }, 0.9);
+            .from(strip, { autoAlpha: 0, duration: 0.8 }, 0.7)
+            .from(regua, { scaleX: 0, duration: 1.2 }, 0.8);
         }
       }
 
@@ -138,7 +131,7 @@ export function SolarChoreography() {
         const equivalente = document.createElement("span");
         equivalente.className = "sr-only";
         equivalente.textContent = textoIntegro;
-        manifesto.insertAdjacentElement("afterend", equivalente);
+        manifesto.append(equivalente);
         cleanups.push(() => {
           equivalente.remove();
           split.revert();

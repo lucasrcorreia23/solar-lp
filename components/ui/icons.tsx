@@ -123,6 +123,24 @@ export function IconeWhatsApp({ className }: IconeProps) {
   );
 }
 
+/** Seta diagonal: link que sai da página ou leva adiante. */
+export function IconeSeta({ className }: IconeProps) {
+  return (
+    <Svg className={className}>
+      <path d="M7 17 17 7M8.5 7H17v8.5" />
+    </Svg>
+  );
+}
+
+/** Seta para baixo: âncora dentro da própria página. */
+export function IconeSetaBaixo({ className }: IconeProps) {
+  return (
+    <Svg className={className}>
+      <path d="M12 5v14M6.5 13.5 12 19l5.5-5.5" />
+    </Svg>
+  );
+}
+
 export type NomeIcone =
   | "marca"
   | "vendas"

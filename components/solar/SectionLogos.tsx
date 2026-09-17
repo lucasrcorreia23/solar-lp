@@ -18,11 +18,7 @@ function Logo({ marca }: { marca: ClientLogo }) {
         height: `calc(var(${BASE_H_VAR}) * ${marca.escala})`,
         maxWidth: `${MAX_W}rem`,
       }}
-      className={`w-auto object-contain opacity-80 mix-blend-multiply ${
-        marca.claro
-          ? "[filter:invert(1)_grayscale(1)_contrast(1.08)]"
-          : "[filter:grayscale(1)_contrast(1.08)]"
-      }`}
+      className="w-auto object-contain opacity-75 [filter:brightness(0)]"
     />
   );
 }
@@ -31,7 +27,7 @@ function Marcas({ hidden = false }: { hidden?: boolean }) {
   return (
     <ul
       aria-hidden={hidden || undefined}
-      className="flex shrink-0 items-center gap-x-12 pr-12 md:gap-x-16 md:pr-16"
+      className="flex shrink-0 items-center gap-x-12 pr-12 md:gap-x-20 md:pr-20"
     >
       {SOLAR.logos.marcas.map((marca) => (
         <li key={marca.nome} className="flex shrink-0 items-center">
@@ -42,29 +38,34 @@ function Marcas({ hidden = false }: { hidden?: boolean }) {
   );
 }
 
+/** Faixa de clientes: fecha a primeira dobra do hero. */
 export function SectionLogos() {
   return (
-    <section aria-label="Clientes" className="px-6 md:px-10">
-      <div
-        data-hero-strip
-        className="mx-auto w-full max-w-[90rem] border-t border-border py-7"
-      >
-        <div className="flex flex-col gap-5 [--logo-h:1.75rem] md:[--logo-h:2.25rem]">
-          <p className="font-mono text-utility uppercase text-fg">
-            {SOLAR.logos.intro}
-          </p>
-          <div
-            data-marquee-viewport
-            className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_2.5rem,#000_calc(100%-2.5rem),transparent)]"
-          >
-            <div data-marquee-track className="flex w-max">
-              {METADE.map((_, i) => (
-                <Marcas key={`a${i}`} hidden={i > 0} />
-              ))}
-              {METADE.map((_, i) => (
-                <Marcas key={`b${i}`} hidden />
-              ))}
-            </div>
+    <section
+      aria-label="Clientes"
+      data-hero-strip
+      className="relative mx-auto w-full max-w-[90rem] border-t border-border py-6 md:py-8"
+    >
+      <span
+        data-hero-rule
+        aria-hidden="true"
+        className="absolute -top-px left-0 w-16 origin-left border-t border-accent md:w-24"
+      />
+      <div className="flex flex-col gap-5 [--logo-h:1.625rem] md:flex-row md:items-center md:gap-12 md:[--logo-h:2rem]">
+        <p className="shrink-0 font-mono text-utility uppercase text-fg">
+          {SOLAR.logos.intro}
+        </p>
+        <div
+          data-marquee-viewport
+          className="min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_3rem,#000_calc(100%-3rem),transparent)]"
+        >
+          <div data-marquee-track className="flex w-max">
+            {METADE.map((_, i) => (
+              <Marcas key={`a${i}`} hidden={i > 0} />
+            ))}
+            {METADE.map((_, i) => (
+              <Marcas key={`b${i}`} hidden />
+            ))}
           </div>
         </div>
       </div>

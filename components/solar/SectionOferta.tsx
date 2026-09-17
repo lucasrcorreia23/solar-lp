@@ -1,61 +1,81 @@
+import type { ReactNode } from "react";
 import { Cta } from "@/components/ui/Cta";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SOLAR } from "@/content/solar";
 
+function Oferta({
+  titulo,
+  kicker,
+  copy,
+  itens,
+  className = "",
+  children,
+}: {
+  titulo: string;
+  kicker: string;
+  copy: string;
+  itens: readonly string[];
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <article
+      className={`pt-10 md:pt-14 lg:row-span-5 lg:grid lg:grid-rows-subgrid ${className}`}
+    >
+      <h3 className="text-display-sm">{titulo}</h3>
+      <p className="mt-4 font-mono text-utility uppercase text-heading">
+        {kicker}
+      </p>
+      <p className="mt-6 max-w-[52ch]">{copy}</p>
+      <ul className="mt-8 space-y-3 border-t border-border pt-8">
+        {itens.map((item) => (
+          <li key={item} className="flex max-w-[48ch] gap-4">
+            <span
+              aria-hidden="true"
+              className="mt-[0.8em] w-5 shrink-0 border-t border-accent"
+            />
+            <span className="text-heading">{item}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-10 self-end md:mt-12">{children}</div>
+    </article>
+  );
+}
+
 export function SectionOferta() {
-  const { eyebrow, titulo, rapida, sobMedida } = SOLAR.oferta;
+  const { titulo, rapida, sobMedida } = SOLAR.oferta;
   return (
     <section
       id="oferta"
       className="scroll-mt-24 px-6 py-section-sm md:px-10 md:py-section"
     >
       <div className="mx-auto max-w-[90rem]">
-        <Eyebrow>{eyebrow}</Eyebrow>
-        <h2 className="mt-6 max-w-[18ch] text-display leading-display-wrap">
-          {titulo}
-        </h2>
+        <h2 className="max-w-[24ch] text-display-md">{titulo}</h2>
 
-        <div className="mt-16 grid gap-14 border-t border-border md:mt-20 md:grid-cols-2 md:gap-20">
-          <article className="pt-12 md:pt-16">
-            <p className="font-mono text-utility uppercase text-fg">
-              {rapida.kicker}
-            </p>
-            <h3 className="mt-5 text-display-sm">{rapida.titulo}</h3>
-            <p className="mt-4 max-w-md">{rapida.copy}</p>
-            <ul className="mt-8 space-y-3">
-              {rapida.itens.map((item) => (
-                <li key={item} className="flex gap-3 max-w-md">
-                  <span aria-hidden="true" className="mt-[0.7em] h-px w-5 shrink-0 bg-accent" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-10 max-w-md">{rapida.pergunta}</p>
-            <div className="mt-6">
-              <Cta href={rapida.cta.href}>{rapida.cta.label}</Cta>
-            </div>
-          </article>
+        <div className="mt-14 grid border-t border-heading md:mt-20 lg:grid-cols-2 lg:grid-rows-[repeat(4,auto)_1fr] lg:gap-x-20">
+          <Oferta
+            titulo={rapida.titulo}
+            kicker={rapida.kicker}
+            copy={rapida.copy}
+            itens={rapida.itens}
+          >
+            <p className="mb-5">{rapida.pergunta}</p>
+            <Cta href={rapida.cta.href} className="w-full sm:w-auto">
+              {rapida.cta.label}
+            </Cta>
+          </Oferta>
 
-          <article className="border-t border-border pt-12 md:border-t-0 md:border-l md:pl-20 md:pt-16">
-            <p className="font-mono text-utility uppercase text-fg">
-              {sobMedida.kicker}
-            </p>
-            <h3 className="mt-5 text-display-sm">{sobMedida.titulo}</h3>
-            <p className="mt-4 max-w-md">{sobMedida.copy}</p>
-            <ul className="mt-8 space-y-3">
-              {sobMedida.itens.map((item) => (
-                <li key={item} className="flex gap-3 max-w-md">
-                  <span aria-hidden="true" className="mt-[0.7em] h-px w-5 shrink-0 bg-accent" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-12">
-              <Cta href={sobMedida.cta.href} variant="secondary">
-                {sobMedida.cta.label}
-              </Cta>
-            </div>
-          </article>
+          <Oferta
+            titulo={sobMedida.titulo}
+            kicker={sobMedida.kicker}
+            copy={sobMedida.copy}
+            itens={sobMedida.itens}
+            className="mt-14 border-t border-border lg:mt-0 lg:border-t-0 lg:border-l lg:pl-20"
+          >
+            <Cta href={sobMedida.cta.href} variant="secondary">
+              {sobMedida.cta.label}
+            </Cta>
+          </Oferta>
         </div>
       </div>
     </section>
