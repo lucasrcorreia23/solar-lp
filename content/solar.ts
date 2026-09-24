@@ -18,7 +18,6 @@ export interface Img {
 export interface CaseCard {
   slug: string;
   cliente: string;
-  projeto?: string;
   disciplinas: readonly string[];
   descricao: string;
   /** O resultado em uma frase: `valor` abre a frase e recebe o destaque. */
@@ -211,7 +210,7 @@ export const SOLAR = {
           "Dentro do trabalho com a PV Operation, desenhamos a marca e a experiência do app que leva a gestão de usinas ao celular de quem gera a própria energia.",
         dado: {
           valor: "SUN WEG,",
-          texto: "a marca e o app de gestão de usinas criados em parceria com a WEG.",
+          texto: "marca e app criados em parceria com a WEG.",
         },
         capa: {
           src: "/cases/weg-sunweg/capa.jpg",
@@ -257,13 +256,12 @@ export const SOLAR = {
       {
         slug: "forum-veiculos-eletricos",
         cliente: "Proattive Engenharia",
-        projeto: "Fórum de Carregadores de Veículos Elétricos",
         disciplinas: ["EVENTO", "LANÇAMENTO", "PRODUTO DIGITAL"],
         descricao:
-          "Estratégia e lançamento do 1º Fórum sobre Normatização de Recarga de Veículos Elétricos, com auditório lotado, conectado aos novos cursos online e à página de treinamentos.",
+          "Estratégia e lançamento de um fórum técnico com auditório lotado, conectado aos cursos online e à nova página de treinamentos.",
         dado: {
           valor: "3 cursos",
-          texto: "lançados no fórum: Brigada de Incêndio, Projeto Preventivo e Veículos Elétricos.",
+          texto: "lançados no Fórum de Carregadores de Veículos Elétricos.",
         },
         capa: {
           src: "/cases/forum-veiculos-eletricos/capa.jpg",
