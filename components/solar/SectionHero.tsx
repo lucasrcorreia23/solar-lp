@@ -19,10 +19,10 @@ export function SectionHero() {
         </h1>
         <div
           data-hero-sub
-          className="mt-8 grid gap-8 md:mt-12 xl:grid-cols-12 xl:items-end xl:gap-x-8"
+          className="mt-8 flex flex-col gap-8 md:mt-12"
         >
-          <p className="max-w-[48ch] xl:col-span-5">{apoio}</p>
-          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-x-8 xl:col-span-7 xl:justify-end">
+          <p className="max-w-[52ch]">{apoio}</p>
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-x-8">
             <Cta href={ctaPrimario.href} size="lg" className="w-full sm:w-auto">
               {ctaPrimario.label}
             </Cta>

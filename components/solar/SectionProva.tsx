@@ -3,75 +3,115 @@ import { IconeSeta } from "@/components/ui/icons";
 import { SITE } from "@/content/site";
 import { SOLAR, type CaseCard } from "@/content/solar";
 
-const SIZES_CAPA = "(min-width: 1520px) 830px, (min-width: 1024px) 57vw, 100vw";
-const SIZES_DETALHE = "(min-width: 1024px) 20vw, (min-width: 640px) 60vw, 100vw";
+const SIZES_DESTAQUE = "(min-width: 1520px) 830px, (min-width: 1024px) 57vw, 100vw";
+const SIZES_PAR = "(min-width: 1520px) 700px, (min-width: 768px) 48vw, 100vw";
+const SIZES_TRIO = "(min-width: 1520px) 460px, (min-width: 768px) 31vw, 100vw";
 
 /**
- * Um case por linha, cada um com o próprio visual: a capa (produto ou foto do
- * trabalho), um detalhe e o dado que resume o resultado. As linhas alternam o
- * lado da capa para a lista não virar uma pilha de parágrafos.
+ * Todo case tem a mesma anatomia, na ordem em que se lê: capa, cliente, o
+ * resultado numa frase, o que foi feito e as disciplinas. O resultado abre
+ * com o `valor` em destaque, sem virar um número solto competindo com o nome.
  */
-function CaseLinha({ caso, invertido }: { caso: CaseCard; invertido: boolean }) {
+function Dado({ dado, grande = false }: { dado: CaseCard["dado"]; grande?: boolean }) {
+  return (
+    <p
+      className={`font-display font-semibold text-heading ${
+        grande ? "text-display-sm leading-[1.2]" : "text-lg leading-snug md:text-xl"
+      }`}
+    >
+      <span className="text-accent">{dado.valor}</span> {dado.texto}
+    </p>
+  );
+}
+
+function Titulo({ caso, grande = false }: { caso: CaseCard; grande?: boolean }) {
+  return (
+    <h3 className={grande ? "text-display-md" : "text-display-sm"}>
+      {caso.cliente}
+      <IconeSeta className="ml-[0.2em] inline-block h-[0.7em] w-[0.7em] align-[-0.02em] text-accent transition-transform duration-fast ease-out-expo group-hover:-translate-y-1 group-hover:translate-x-1" />
+      {caso.projeto && (
+        <span className="mt-1 block font-body text-body font-normal tracking-normal text-fg">
+          {caso.projeto}
+        </span>
+      )}
+    </h3>
+  );
+}
+
+function Disciplinas({ caso }: { caso: CaseCard }) {
+  return (
+    <p className="font-mono text-utility uppercase text-fg">
+      {caso.disciplinas.join(" · ")}
+    </p>
+  );
+}
+
+function Capa({
+  caso,
+  sizes,
+  className,
+}: {
+  caso: CaseCard;
+  sizes: string;
+  className: string;
+}) {
+  return (
+    <div
+      data-card-cover
+      className={`relative overflow-hidden bg-assistant ${className}`}
+    >
+      <Image
+        src={caso.capa.src}
+        alt={caso.capa.alt}
+        fill
+        sizes={sizes}
+        className="object-cover transition-transform duration-slow ease-out-expo group-hover:scale-[1.03]"
+      />
+    </div>
+  );
+}
+
+function linkDoCase(slug: string) {
+  return {
+    href: `${SITE.url}/projetos/${slug}`,
+    target: "_blank",
+    rel: "noopener noreferrer",
+    "data-cursor": "Ver case",
+  } as const;
+}
+
+/** R4 lidera: é o case que prova a oferta de entrada (o RGC). */
+function CaseDestaque({ caso }: { caso: CaseCard }) {
   return (
     <a
-      href={`${SITE.url}/projetos/${caso.slug}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      data-cursor="Ver case"
-      className="group grid gap-8 border-t border-border pt-8 md:pt-10 lg:grid-cols-12 lg:gap-x-8"
+      {...linkDoCase(caso.slug)}
+      className="group grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-x-8"
     >
-      <div
-        data-card-cover
-        className={`relative aspect-[4/3] overflow-hidden bg-assistant lg:col-span-7 lg:row-start-1 ${
-          invertido ? "lg:col-start-6" : ""
-        }`}
-      >
-        <Image
-          src={caso.capa.src}
-          alt={caso.capa.alt}
-          fill
-          sizes={SIZES_CAPA}
-          className="object-cover transition-transform duration-slow ease-out-expo group-hover:scale-[1.03]"
-        />
+      <Capa
+        caso={caso}
+        sizes={SIZES_DESTAQUE}
+        className="aspect-[4/3] lg:col-span-7"
+      />
+      <div className="flex flex-col gap-6 lg:col-span-5">
+        <Titulo caso={caso} grande />
+        <Dado dado={caso.dado} grande />
+        <p className="max-w-[48ch]">{caso.descricao}</p>
+        <Disciplinas caso={caso} />
       </div>
+    </a>
+  );
+}
 
-      <div
-        className={`flex flex-col lg:col-span-5 lg:row-start-1 ${
-          invertido ? "lg:col-start-1" : ""
-        }`}
-      >
-        <p className="font-mono text-utility uppercase text-fg">
-          {caso.numero}
-          {caso.projeto && ` · ${caso.projeto}`}
-        </p>
-        <h3 className="mt-3 text-display-sm">
-          {caso.cliente}
-          <IconeSeta className="ml-[0.2em] inline-block h-[0.7em] w-[0.7em] align-[-0.02em] text-accent transition-transform duration-fast ease-out-expo group-hover:-translate-y-1 group-hover:translate-x-1" />
-        </h3>
-        <p className="mt-3 font-mono text-utility uppercase text-heading">
-          {caso.disciplinas.join(" · ")}
-        </p>
-        <p className="mt-5 max-w-[52ch]">{caso.descricao}</p>
-
-        <p className="relative mt-8 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-t border-border pt-6">
-          <span
-            aria-hidden="true"
-            className="absolute -top-px left-0 w-16 border-t border-accent"
-          />
-          <span className="font-display text-display-md font-semibold text-accent">
-            {caso.dado.valor}
-          </span>
-          <span className="max-w-[32ch] text-heading">{caso.dado.texto}</span>
-        </p>
-
-        <div className="relative mt-8 aspect-[4/3] w-full overflow-hidden bg-assistant sm:w-3/5 lg:mt-auto">
-          <Image
-            src={caso.detalhe.src}
-            alt={caso.detalhe.alt}
-            fill
-            sizes={SIZES_DETALHE}
-            className="object-cover"
-          />
+function CaseCartao({ caso, sizes }: { caso: CaseCard; sizes: string }) {
+  return (
+    <a {...linkDoCase(caso.slug)} className="group flex flex-col">
+      <Capa caso={caso} sizes={sizes} className="aspect-[4/3]" />
+      <div className="mt-6 flex flex-1 flex-col gap-4">
+        <Titulo caso={caso} />
+        <Dado dado={caso.dado} />
+        <p className="max-w-[52ch]">{caso.descricao}</p>
+        <div className="mt-auto pt-2">
+          <Disciplinas caso={caso} />
         </div>
       </div>
     </a>
@@ -80,6 +120,10 @@ function CaseLinha({ caso, invertido }: { caso: CaseCard; invertido: boolean }) 
 
 export function SectionProva() {
   const { titulo, cases } = SOLAR.prova;
+  const [destaque, ...resto] = cases;
+  // PV Operation e WEG lado a lado: o SUN WEG nasceu dentro do trabalho com a PV.
+  const par = resto.slice(0, 2);
+  const trio = resto.slice(2);
 
   return (
     <section
@@ -91,9 +135,19 @@ export function SectionProva() {
           {titulo}
         </h2>
 
-        <div className="mt-14 flex flex-col gap-16 md:mt-20 md:gap-24">
-          {cases.map((caso, i) => (
-            <CaseLinha key={caso.slug} caso={caso} invertido={i % 2 === 1} />
+        <div className="mt-14 border-t border-border pt-10 md:mt-20 md:pt-14">
+          <CaseDestaque caso={destaque} />
+        </div>
+
+        <div className="mt-16 grid gap-14 border-t border-border pt-10 md:mt-24 md:grid-cols-2 md:gap-x-8 md:pt-14">
+          {par.map((caso) => (
+            <CaseCartao key={caso.slug} caso={caso} sizes={SIZES_PAR} />
+          ))}
+        </div>
+
+        <div className="mt-16 grid gap-14 border-t border-border pt-10 md:mt-24 md:grid-cols-3 md:gap-x-8 md:pt-14">
+          {trio.map((caso) => (
+            <CaseCartao key={caso.slug} caso={caso} sizes={SIZES_TRIO} />
           ))}
         </div>
       </div>

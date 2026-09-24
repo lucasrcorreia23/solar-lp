@@ -30,7 +30,10 @@ function ExemploRgc() {
               </p>
               <dl className="mt-3 space-y-2 text-[0.8125rem] leading-snug">
                 {etapa.linhas.map(([rotuloLinha, valor]) => (
-                  <div key={rotuloLinha}>
+                  <div
+                    key={rotuloLinha}
+                    className="flex items-baseline justify-between gap-4 sm:block"
+                  >
                     <dt className={final ? "text-partner-fg" : "text-fg"}>
                       {rotuloLinha}
                     </dt>
@@ -131,7 +134,6 @@ export function SectionOferta() {
             itens={rapida.itens}
             visual={<ExemploRgc />}
           >
-            <p className="mb-5">{rapida.pergunta}</p>
             <Cta href={rapida.cta.href} className="w-full sm:w-auto">
               {rapida.cta.label}
             </Cta>

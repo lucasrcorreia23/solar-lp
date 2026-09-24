@@ -32,17 +32,10 @@ export default function Home() {
         </h2>
         <div className="mt-12 grid gap-12 md:mt-20 lg:grid-cols-12 lg:gap-x-8">
           <div className="lg:col-span-5">
-            <p className="flex flex-col gap-2">
-              <span className="font-display text-display-xl font-semibold text-accent">
-                {SOLAR.tese.desde.valor}
-              </span>
-              <span className="font-mono text-utility uppercase text-reverse-heading">
-                {SOLAR.tese.desde.texto}
-              </span>
+            <p className="font-display text-display-sm font-semibold leading-[1.2] text-reverse-heading">
+              {SOLAR.tese.desde}
             </p>
-            <p className="mt-8 max-w-[44ch] border-t border-partner-line pt-8 text-partner-fg">
-              {SOLAR.tese.copy}
-            </p>
+            <p className="mt-5 max-w-[44ch] text-partner-fg">{SOLAR.tese.copy}</p>
           </div>
           <ol className="border-t border-partner-line lg:col-span-6 lg:col-start-7">
             {SOLAR.tese.provas.map((prova, i) => (

@@ -17,16 +17,13 @@ export interface Img {
 
 export interface CaseCard {
   slug: string;
-  numero: string;
   cliente: string;
   projeto?: string;
   disciplinas: readonly string[];
   descricao: string;
-  /** O dado que resume o case: número grande + frase curta ao lado. */
+  /** O resultado em uma frase: `valor` abre a frase e recebe o destaque. */
   dado: { valor: string; texto: string };
   capa: Img;
-  /** Segunda imagem do case: o detalhe do produto ou do trabalho. */
-  detalhe: Img;
 }
 
 export interface Animacao {
@@ -180,7 +177,6 @@ export const SOLAR = {
     cases: [
       {
         slug: "r4-energias",
-        numero: "01",
         cliente: "R4 Energias Renováveis",
         disciplinas: ["BRANDING", "PRODUTO DIGITAL", "IA"],
         descricao:
@@ -192,16 +188,9 @@ export const SOLAR = {
           width: 1600,
           height: 1033,
         },
-        detalhe: {
-          src: "/cases/r4-energias/site.jpg",
-          alt: "Site institucional da R4 Energias em dois monitores, com as soluções de geração e a chamada de investimento",
-          width: 1920,
-          height: 1440,
-        },
       },
       {
         slug: "pv-operation",
-        numero: "02",
         cliente: "PV Operation",
         disciplinas: ["PRODUTO DIGITAL", "UX/UI", "EVOLUÇÃO"],
         descricao:
@@ -213,24 +202,16 @@ export const SOLAR = {
           width: 1920,
           height: 1280,
         },
-        detalhe: {
-          src: "/cases/pv-operation/scada-campo.jpg",
-          alt: "Técnico de capacete e colete refletivo operando o SCADA num tablet, com o mapa sinóptico da usina e o comando de um disjuntor",
-          width: 1448,
-          height: 1086,
-        },
       },
       {
         slug: "weg-sunweg",
-        numero: "03",
         cliente: "WEG",
-        projeto: "SUN WEG",
         disciplinas: ["BRANDING", "PRODUTO DIGITAL", "UX/UI"],
         descricao:
-          "Parceria de marca dentro do trabalho com a PV Operation: criamos a marca SUN WEG e desenhamos a experiência do app que leva a gestão de usinas ao celular de quem gera a própria energia.",
+          "Dentro do trabalho com a PV Operation, desenhamos a marca e a experiência do app que leva a gestão de usinas ao celular de quem gera a própria energia.",
         dado: {
-          valor: "SUN WEG",
-          texto: "Marca e app de gestão de usinas para a entrada da WEG no solar.",
+          valor: "SUN WEG,",
+          texto: "a marca e o app de gestão de usinas criados em parceria com a WEG.",
         },
         capa: {
           src: "/cases/weg-sunweg/capa.jpg",
@@ -238,23 +219,16 @@ export const SOLAR = {
           width: 1600,
           height: 1173,
         },
-        detalhe: {
-          src: "/cases/weg-sunweg/desktop-mobile.jpg",
-          alt: "Painel web de contabilização de energia da WEG em notebook e tela de login do SUN WEG no celular",
-          width: 2400,
-          height: 1549,
-        },
       },
       {
         slug: "unifique-energia",
-        numero: "04",
         cliente: "Unifique Energia",
         disciplinas: ["PRODUTO DIGITAL", "UX/UI", "COMUNICAÇÃO"],
         descricao:
           "Experiência digital de ponta a ponta para energia por assinatura, transformando a comercialização em uma jornada simples.",
         dado: {
           valor: "3 etapas",
-          texto: "Simulador de economia, contratação e painel de acompanhamento.",
+          texto: "numa só jornada: simulação, contratação e acompanhamento.",
         },
         capa: {
           src: "/cases/unifique-energia/capa.jpg",
@@ -262,23 +236,16 @@ export const SOLAR = {
           width: 1448,
           height: 1086,
         },
-        detalhe: {
-          src: "/cases/unifique-energia/contratacao.jpg",
-          alt: "Fluxo de contratação da UNIFIQUE Energia em notebook, dividido em etapas numeradas",
-          width: 1600,
-          height: 1112,
-        },
       },
       {
         slug: "solan-iot",
-        numero: "05",
         cliente: "Solan Group",
         disciplinas: ["PESQUISA", "PRODUTO DIGITAL", "UX/UI"],
         descricao:
           "Plataforma web e mobile que acompanha usinas, alertas e chamados, e explica geração e retorno do investimento.",
         dado: {
           valor: "2 públicos",
-          texto: "O integrador e o cliente final na mesma plataforma.",
+          texto: "na mesma plataforma: o integrador e o cliente final.",
         },
         capa: {
           src: "/cases/solan-iot/capa.jpg",
@@ -286,34 +253,21 @@ export const SOLAR = {
           width: 2048,
           height: 1268,
         },
-        detalhe: {
-          src: "/cases/solan-iot/alertas.jpg",
-          alt: "Mapa da plataforma Solan IoT com as usinas plotadas no litoral catarinense, cada pino colorido pelo status",
-          width: 922,
-          height: 780,
-        },
       },
       {
         slug: "forum-veiculos-eletricos",
-        numero: "06",
         cliente: "Proattive Engenharia",
         projeto: "Fórum de Carregadores de Veículos Elétricos",
         disciplinas: ["EVENTO", "LANÇAMENTO", "PRODUTO DIGITAL"],
         descricao:
-          "O 1º Fórum sobre Normatização de Recarga de Veículos Elétricos lotou o auditório para simplificar a norma dos bombeiros para pontos de recarga. Conectamos o evento ao lançamento dos cursos online e à nova página de treinamentos.",
+          "Estratégia e lançamento do 1º Fórum sobre Normatização de Recarga de Veículos Elétricos, com auditório lotado, conectado aos novos cursos online e à página de treinamentos.",
         dado: {
           valor: "3 cursos",
-          texto: "Lançados no fórum: Brigada de Incêndio, Projeto Preventivo e Veículos Elétricos.",
+          texto: "lançados no fórum: Brigada de Incêndio, Projeto Preventivo e Veículos Elétricos.",
         },
         capa: {
           src: "/cases/forum-veiculos-eletricos/capa.jpg",
           alt: "Palestrante no palco do 1º Fórum sobre Normatização de Recarga de Veículos Elétricos, visto do fundo do auditório lotado",
-          width: 2400,
-          height: 1350,
-        },
-        detalhe: {
-          src: "/cases/forum-veiculos-eletricos/plateia.jpg",
-          alt: "Plateia cheia do fórum de veículos elétricos acompanhando a palestra no auditório",
           width: 2400,
           height: 1350,
         },
@@ -363,7 +317,6 @@ export const SOLAR = {
           },
         ],
       },
-      pergunta: "Quer saber como funciona na prática?",
       cta: {
         label: "Quero entender o RGC automatizado",
         href: whatsappComTexto(
@@ -424,7 +377,7 @@ export const SOLAR = {
   },
   tese: {
     titulo: "Não somos mais um fornecedor de tecnologia.",
-    desde: { valor: "2019", texto: "Desde então no mercado solar" },
+    desde: "Desde 2019 no mercado solar.",
     copy: "Quando você fala com o Estúdio, não precisa explicar o que é geração distribuída, RGC ou integrador. A gente já entende o vocabulário do seu mercado.",
     provas: [
       "Rebranding de comercializadora de energia",
