@@ -1,7 +1,7 @@
 /** Dados institucionais — fonte única para nav, contato e redes. */
 export const SITE = {
   name: "Estúdio Nákama",
-  tagline: "O estúdio de estratégia, design e tecnologia do setor solar.",
+  tagline: "O estúdio de estratégia, design e tecnologia do mercado solar.",
   bordao: "Da intenção à solução.",
   url: "https://www.estudionakama.com.br",
   email: "aderbal@estudionakama.com.br",

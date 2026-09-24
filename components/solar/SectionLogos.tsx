@@ -52,7 +52,8 @@ export function SectionLogos() {
         className="absolute -top-px left-0 w-16 origin-left border-t border-accent md:w-24"
       />
       <div className="flex flex-col gap-5 [--logo-h:1.625rem] md:flex-row md:items-center md:gap-12 md:[--logo-h:2rem]">
-        <p className="shrink-0 font-mono text-utility uppercase text-fg">
+        <p className="flex shrink-0 flex-col gap-1 font-mono text-utility uppercase text-fg">
+          <span className="text-heading">{SOLAR.logos.desde}</span>
           {SOLAR.logos.intro}
         </p>
         <div

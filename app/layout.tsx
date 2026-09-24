@@ -39,7 +39,7 @@ const spaceMono = Space_Mono({
 
 const TITULO = "Estúdio Nákama | Energia solar";
 const DESCRICAO =
-  "Estúdio de estratégia, design e tecnologia para o setor solar: marca, produto digital e automação. Cases com R4, PV Operation, Unifique Energia e Solan.";
+  "Estúdio de estratégia, design e tecnologia para o mercado solar: marca, produto digital e automação. Cases com R4, PV Operation, WEG, Unifique Energia, Solan e Proattive.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),

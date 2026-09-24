@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/:dir(cases|clients|brand)/:path*",
+        source: "/:dir(cases|clients|brand|team)/:path*",
         headers: [
           {
             key: "Cache-Control",

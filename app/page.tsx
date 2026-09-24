@@ -31,23 +31,32 @@ export default function Home() {
           {SOLAR.tese.titulo}
         </h2>
         <div className="mt-12 grid gap-12 md:mt-20 lg:grid-cols-12 lg:gap-x-8">
-          <p className="max-w-[56ch] text-partner-fg lg:col-span-5">
-            {SOLAR.tese.copy}
-          </p>
-          <ul className="border-t border-partner-line lg:col-span-6 lg:col-start-7">
-            {SOLAR.tese.provas.map((prova) => (
+          <div className="lg:col-span-5">
+            <p className="flex flex-col gap-2">
+              <span className="font-display text-display-xl font-semibold text-accent">
+                {SOLAR.tese.desde.valor}
+              </span>
+              <span className="font-mono text-utility uppercase text-reverse-heading">
+                {SOLAR.tese.desde.texto}
+              </span>
+            </p>
+            <p className="mt-8 max-w-[44ch] border-t border-partner-line pt-8 text-partner-fg">
+              {SOLAR.tese.copy}
+            </p>
+          </div>
+          <ol className="border-t border-partner-line lg:col-span-6 lg:col-start-7">
+            {SOLAR.tese.provas.map((prova, i) => (
               <li
                 key={prova}
-                className="flex gap-4 border-b border-partner-line py-4 font-display text-lg font-semibold md:py-5 md:text-xl"
+                className="flex items-baseline gap-5 border-b border-partner-line py-4 font-display text-lg font-semibold md:py-5 md:text-xl"
               >
-                <span
-                  aria-hidden="true"
-                  className="mt-[0.75em] w-5 shrink-0 border-t border-accent"
-                />
+                <span className="w-10 shrink-0 font-mono text-utility font-normal text-accent">
+                  {String(i + 1).padStart(3, "0")}
+                </span>
                 {prova}
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </BlocoTese>
       <SectionConversao />
